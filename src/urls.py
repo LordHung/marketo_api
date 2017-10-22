@@ -13,9 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.views.generic import RedirectView
 from django.contrib import admin
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Marketo API')
 
 urlpatterns = [
+    url(r'^$', schema_view, name='home'),
+    url(r'^api/v1/', include('api.urls', namespace='api')),
     url(r'^admin/', admin.site.urls),
 ]

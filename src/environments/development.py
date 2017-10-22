@@ -1,4 +1,4 @@
-from core.settings import *
+from src.settings import *
 import os
 
 DEBUG = True
