@@ -80,13 +80,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# REST
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.IsAdminUser',
-#     ],
-#     'PAGE_SIZE': 10
-# }
 # RESTful API
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -94,7 +87,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
@@ -122,9 +116,22 @@ SWAGGER_SETTINGS = {
             'in': 'header',
         }
     },
+    'LOGIN_URL': '/',
+    'LOGOUT_URL': '/',
+    'EXCLUDE_NAMESPACES': [],  # List URL namespaces to ignore
+    'APIS_SORTER': 'alpha',
+    'OPERATIONS_SORTER': 'alpha',
+    'SHOW_REQUEST_HEADERS': True,
+    'SUPPORTED_SUBMIT_METHODS': [  # Specify which methods to enable in Swagger UI
+        'get',
+        'post',
+        'put',
+        'patch',
+        'delete'
+    ], 
     'USE_SESSION_AUTH': False,
     'JSON_EDITOR': True,
-    'VALIDATOR_URL': None
+    'VALIDATOR_URL': None,
 }
 
 # Internationalization
@@ -140,6 +147,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Session expired after 10min
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 10 * 60
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
