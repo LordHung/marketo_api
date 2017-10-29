@@ -9,9 +9,10 @@ User = settings.AUTH_USER_MODEL
 class Store(models.Model):
     title = models.CharField(max_length=255)
     user = models.OneToOneField(User)
-    views_count = models.PositiveIntegerField(default=0, blank=True, null=True)
-    reviews_count = models.PositiveIntegerField(default=0, blank=True, null=True)
-    rating_cache = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
+    active = models.BooleanField(default=True)
+    views_count = models.PositiveIntegerField(default=0, null=True)
+    reviews_count = models.PositiveIntegerField(default=0, null=True)
+    rating_cache = models.PositiveSmallIntegerField(default=0, null=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     
