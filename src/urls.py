@@ -17,7 +17,6 @@ from django.conf.urls import url, include
 from django.views.generic import RedirectView
 from django.contrib import admin
 from rest_framework_swagger.views import get_swagger_view
-from accounts.views import TokenAuthView, Logout
 
 schema_view = get_swagger_view(title='Marketo API')
 

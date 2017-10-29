@@ -17,7 +17,6 @@ class UserManager(BaseUserManager):
             full_name=full_name
         )
         user_obj.set_password(make_password(password))
-        print(password)
         user_obj.is_active = is_active
         user_obj.is_staff = is_staff
         user_obj.is_admin = is_admin
