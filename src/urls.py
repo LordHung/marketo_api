@@ -23,7 +23,7 @@ schema_view = get_swagger_view(title='Marketo API')
 
 urlpatterns = [
     url(r'^$', schema_view, name='home'),
-    url(r'^api/v1/', include('api.urls', namespace='api')),
+    url(r'^api/', include('api.urls', namespace='api')),
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework.urls')),
     # url(r'^logout/', Logout.as_view()),
