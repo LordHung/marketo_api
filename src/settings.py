@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_swagger',
     # our apps
-    'accounts'
+    'accounts',
+    'stores'
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours

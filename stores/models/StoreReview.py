@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-import Store
+from . import Store
 
 User = settings.AUTH_USER_MODEL
 
