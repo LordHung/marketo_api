@@ -19,6 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Application definition
 
 INSTALLED_APPS = [
+    # django default apps and 3rd-party apps
     'django_adminlte',
     'django_adminlte_theme',
     'django.contrib.admin',
@@ -27,10 +28,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
+    # our apps
+    'accounts'
 ]
+
+AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,12 +89,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # RESTful API
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',

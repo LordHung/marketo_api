@@ -1,9 +1,11 @@
 # Django
 Django==1.11.6
 djangorestframework==3.7.1
-django-rest-swagger==2.1.2
+django-rest-swagger==2.1.2  # API Documentation
+djangorestframework-jwt==1.11.0  # JSON Web Token for DRF
+django-adminlte2==0.1.6  # Beautiful Admin Page
+django-extensions==1.9.6  # More command for manage.py: reset_db
 gunicorn==19.7.1
-django-adminlte2==0.1.6
 
 # Database
 psycopg2==2.7.3.1
