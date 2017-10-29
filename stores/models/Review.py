@@ -18,3 +18,6 @@ class StoreReview(models.Model):
     spam = models.BooleanField(default=0)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'store_review'
