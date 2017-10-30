@@ -1,8 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from django.contrib.auth.hashers import make_password
-from django.forms.widgets import PasswordInput
 # from accounts.models.User import User
 
 User = get_user_model()
@@ -17,7 +16,6 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'password', 'full_name')
-        # extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, validated_data):
         user = User.objects.create(
