@@ -124,8 +124,8 @@ SWAGGER_SETTINGS = {
             'in': 'header',
         }
     },
-    'LOGIN_URL': '/',
-    'LOGOUT_URL': '/',
+    'LOGIN_URL': 'auth/login',
+    'LOGOUT_URL': 'auth/logout',
     'EXCLUDE_NAMESPACES': [],  # List URL namespaces to ignore
     'APIS_SORTER': 'alpha',
     'OPERATIONS_SORTER': 'alpha',
