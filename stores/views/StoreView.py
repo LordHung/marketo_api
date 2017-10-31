@@ -36,7 +36,7 @@ class StoreAPIView(APIView):
 class StoreViewSet(ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
-    permission_classes = (IsStoreOwnerOrNoModify, IsAuthenticatedOrReadOnly, )
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
 
 class StoreReviewViewSet(ModelViewSet):

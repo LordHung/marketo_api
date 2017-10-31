@@ -39,7 +39,7 @@ router.register(r'api/store-reviews', StoreReviewViewSet)
 
 urlpatterns = [
     url(r'^api/token/', obtain_jwt_token),
-    url(r'^api/refresh-token/', refresh_jwt_token),
+    url(r'^api/token/refresh-token/', refresh_jwt_token),
     url(r'^auth/', include('rest_framework.urls')),  # Default authen of DRF
     # url(r'^api/token/', TokenAuthView.as_view({'post': 'create'})),
     # url(r'^api/stores/', StoreAPIView.as_view(), name='store_index'),
