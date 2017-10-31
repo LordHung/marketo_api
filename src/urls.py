@@ -25,17 +25,17 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from rest_framework.documentation import include_docs_urls
 
 from accounts.views import UserViewSet, TokenAuthView
-from stores.views import StoreViewSet, StoreRVViewSet, StoreAPIView
+from stores.views import StoreViewSet, StoreReviewViewSet, StoreAPIView
 
 from . import schema_generator
 
-# schema_view = get_swagger_view(title='Marketo API')  # Default schema_view Swagger
+schema_view = get_swagger_view(title='Marketo API')  # Default schema_view Swagger
 # schema_view = schema_generator.get_swagger_view(title='Marketo API')  # Customer schema_view
 
 router = routers.DefaultRouter()
 router.register(r'api/users', UserViewSet)
 router.register(r'api/stores', StoreViewSet)
-router.register(r'api/store-reviews', StoreRVViewSet)
+router.register(r'api/store-reviews', StoreReviewViewSet)
 
 urlpatterns = [
     url(r'^api/token/', obtain_jwt_token),
