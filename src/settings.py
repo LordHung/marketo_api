@@ -90,9 +90,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # RESTful API
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -100,6 +101,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',  # Default API Docs of DRF, need to disable on production
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.FormParser',
@@ -110,7 +112,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'api.pagination.CustomPagination',
+    'DEFAULT_PAGINATION_CLASS': 'src.pagination.CustomPagination',
     'PAGE_SIZE': 10
 }
 

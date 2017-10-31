@@ -53,7 +53,7 @@ class Store(models.Model):
     title = models.CharField(max_length=255)
     user = models.OneToOneField(User)
     active = models.BooleanField(default=True)
-    icon = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
+    icon = models.FileField(upload_to=upload_image_path, null=True)
     views_count = models.PositiveIntegerField(default=0, null=True)
     reviews_count = models.PositiveIntegerField(default=0, null=True)
     rating_cache = models.PositiveSmallIntegerField(default=0, null=True)
