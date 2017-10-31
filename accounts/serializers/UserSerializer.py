@@ -8,6 +8,7 @@ User = get_user_model()
 
 
 class UserSerializer(ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='user-detail')
     password = serializers.CharField(
         style={'input_type': 'password'},
         write_only=True,  # <- never send password (or hash) to the client
@@ -15,7 +16,7 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'full_name')
+        fields = ('url', 'email', 'password', 'full_name')
     
     def create(self, validated_data):
         user = User.objects.create(

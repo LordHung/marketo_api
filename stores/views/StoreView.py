@@ -1,9 +1,11 @@
 from django.contrib import messages
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
-from rest_framework import status, permissions, parsers, response, generics
+from rest_framework import status, parsers, response, generics
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from src import filter_backends
+from src.permissions import IsStoreOwnerOrNoModify
 from ..serializers import StoreSerializer, StoreReviewSerializer
 from ..models import Store, StoreReview
 
@@ -34,10 +36,10 @@ class StoreAPIView(APIView):
 class StoreViewSet(ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+    permission_classes = (IsStoreOwnerOrNoModify, IsAuthenticatedOrReadOnly, )
 
 
 class StoreReviewViewSet(ModelViewSet):
     queryset = StoreReview.objects.all()
     serializer_class = StoreReviewSerializer
-    # permission_classes
+    permission_classes = (IsAuthenticatedOrReadOnly, )
