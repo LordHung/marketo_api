@@ -3,9 +3,9 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework import status, permissions, parsers, response, generics
 from rest_framework.response import Response
+from src import filter_backends
 from ..serializers import StoreSerializer, StoreReviewSerializer
 from ..models import Store, StoreReview
-from src import filter_backends
 
 
 class StoreAPIView(APIView):
@@ -37,7 +37,7 @@ class StoreViewSet(ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 
-class StoreRVViewSet(ModelViewSet):
+class StoreReviewViewSet(ModelViewSet):
     queryset = StoreReview.objects.all()
     serializer_class = StoreReviewSerializer
     # permission_classes

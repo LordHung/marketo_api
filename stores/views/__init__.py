@@ -1,1 +1,1 @@
-from .StoreView import StoreViewSet, StoreRVViewSet, StoreAPIView
+from .StoreView import StoreViewSet, StoreReviewViewSet, StoreAPIView
