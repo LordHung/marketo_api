@@ -1,8 +1,13 @@
 import random
+import os
+import shutil
 
 from django.conf import settings
 from django.db import models
 from django.db.models import Q
+from django.utils.text import slugify
+
+from src import settings
 from src.utils import get_filename_ext
 
 # Dùng AUTH_USER_MODEL để set quan hệ, ko dùng get_user_model()
@@ -11,10 +16,15 @@ User = settings.AUTH_USER_MODEL
 
 
 def upload_image_path(instance, filename):
-    new_filename = random.randint(1, 3910209312)
-    name, ext = get_filename_ext(filename)
-    final_filename = f'{new_filename}{ext}'
-    return f'stores/{new_filename}/{final_filename}'
+    user_email = slugify(instance.user.email)  # test@gmail.com -> testgmailcom
+    title = slugify(instance.title)  # nike-star-abc
+    name, ext = get_filename_ext(filename)  # .png, .jpg
+    # email là unique
+    image_path = f'{settings.MEDIA_ROOT}/stores/{user_email}/'
+    # REMOVE EXISTS IMAGE DIR
+    if os.path.exists(image_path):
+        shutil.rmtree(image_path)
+    return f'stores/{user_email}/{title}{ext}'
 
 
 class StoreQuerySet(models.query.QuerySet):
@@ -59,3 +69,6 @@ class Store(models.Model):
 
     class Meta:
         db_table = 'store'
+
+    def __str__(self):
+        return self.title
