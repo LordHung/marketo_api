@@ -1,18 +1,13 @@
-import os
 import random
+
+from django.conf import settings
 from django.db import models
 from django.db.models import Q
-from django.conf import settings
+from src.utils import get_filename_ext
 
 # Dùng AUTH_USER_MODEL để set quan hệ, ko dùng get_user_model()
 # reason: https://stackoverflow.com/questions/24629705/django-using-get-user-model-vs-settings-auth-user-model
 User = settings.AUTH_USER_MODEL
-
-
-def get_filename_ext(filepath):
-    base_name = os.path.basename(filepath)
-    name, ext = os.path.splitext(base_name)
-    return name, ext
 
 
 def upload_image_path(instance, filename):

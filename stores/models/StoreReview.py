@@ -1,5 +1,6 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
+
 from . import Store
 
 User = settings.AUTH_USER_MODEL
@@ -14,8 +15,8 @@ class StoreReview(models.Model):
     store = models.ForeignKey(Store)
     rating = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
     comment = models.TextField(default='', blank=True, null=True)
-    approved = models.BooleanField(default=1)
-    spam = models.BooleanField(default=0)
+    approved = models.BooleanField(default=True)
+    spam = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 

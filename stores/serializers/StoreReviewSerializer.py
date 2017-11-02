@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
-from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
+
+from accounts.serializers import UserSerializer
+
 from ..models import StoreReview
 from ..serializers import StoreSerializer
-from accounts.serializers import UserSerializer
 
 
 class StoreReviewSerializer(ModelSerializer):

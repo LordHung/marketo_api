@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.forms import ModelChoiceField
 from rest_framework import serializers
-from ..models import Store
+
 from accounts.serializers import UserSerializer
+
+from ..models import Store
 
 User = get_user_model()
 
