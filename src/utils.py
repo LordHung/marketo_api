@@ -43,7 +43,7 @@ def unique_order_id_generator(instance):
 
 def unique_slug_generator(instance, new_slug=None):
     """
-    This is for a Django project and it assumes your instance 
+    This is for a Django project and it assumes your instance
     has a model with a slug field and a title character (char) field.
     """
     if new_slug is not None:

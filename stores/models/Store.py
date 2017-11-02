@@ -56,6 +56,6 @@ class Store(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     objects = StoreManager()
-    
+
     class Meta:
         db_table = 'store'
