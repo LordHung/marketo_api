@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils.text import slugify
 
-from src import settings
+from src.settings import MEDIA_ROOT
 from src.utils import get_filename_ext
 
 # Dùng AUTH_USER_MODEL để set quan hệ, ko dùng get_user_model()
@@ -20,11 +20,11 @@ def upload_image_path(instance, filename):
     title = slugify(instance.title)  # nike-star-abc
     name, ext = get_filename_ext(filename)  # .png, .jpg
     # email là unique
-    image_path = f'{settings.MEDIA_ROOT}/stores/{user_email}/'
+    image_path = f'{MEDIA_ROOT}/{user_email}/store/icon/'
     # REMOVE EXISTS IMAGE DIR
     if os.path.exists(image_path):
         shutil.rmtree(image_path)
-    return f'stores/{user_email}/{title}{ext}'
+    return f'{user_email}/store/icon/{title}{ext}'
 
 
 class StoreQuerySet(models.query.QuerySet):
