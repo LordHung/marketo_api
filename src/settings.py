@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     # our apps
     'accounts',
-    'stores'
+    'stores',
+    'products'
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
@@ -138,7 +139,7 @@ SWAGGER_SETTINGS = {
         'put',
         'patch',
         'delete'
-    ], 
+    ],
     'USE_SESSION_AUTH': False,
     'JSON_EDITOR': True,
     'VALIDATOR_URL': None,
