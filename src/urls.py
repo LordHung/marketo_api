@@ -26,6 +26,7 @@ from rest_framework.documentation import include_docs_urls
 
 from accounts.views import UserViewSet, TokenAuthView
 from stores.views import StoreViewSet, StoreReviewViewSet, StoreAPIView
+from products.views import CategoryViewSet, ProductViewSet, VariantViewSet
 
 from . import schema_generator
 
@@ -35,7 +36,10 @@ schema_view = get_swagger_view(title='Marketo API')  # Default schema_view Swagg
 router = routers.DefaultRouter()
 router.register(r'api/users', UserViewSet)
 router.register(r'api/stores', StoreViewSet)
-router.register(r'api/store-reviews', StoreReviewViewSet)
+router.register(r'api/reviews', StoreReviewViewSet)
+router.register(r'api/categories', CategoryViewSet)
+router.register(r'api/products', ProductViewSet)
+router.register(r'api/variants', VariantViewSet)
 
 urlpatterns = [
     url(r'^api/token/', obtain_jwt_token),
