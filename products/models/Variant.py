@@ -1,6 +1,7 @@
 import os
 
 from django.db import models
+from django.db.models.signals import pre_save
 from django.utils.text import slugify
 
 from src.utils import get_filename_ext
@@ -8,13 +9,13 @@ from src.settings import MEDIA_ROOT
 
 
 def upload_image_path(instance, filename):
-    user_email = slugify(instance.user.email)  # test@gmail.com -> testgmailcom
+    user_email = slugify(instance.product.store.user.email)  # test@gmail.com -> testgmailcom
     product_title = slugify(instance.product.title)
     title = slugify(instance.title)  # nike-star-abc
     name, ext = get_filename_ext(filename)  # .png, .jpg
     image_path = f'{MEDIA_ROOT}/{user_email}/store/products/{product_title}/{title}{ext}'
     # REMOVE EXISTS IMAGE DIR
-    if os.path.exists(image_path):
+    if os.path.exists(image_path) and instance.image:
         os.remove(image_path)
     return f'{user_email}/store/products/{product_title}/{title}{ext}'
 
@@ -37,3 +38,11 @@ class Variant(models.Model):
     
     def __str__(self):
         return self.title
+
+
+def variant_pre_save_receiver(sender, instance, *args, **kwargs):
+    current_one = Variant.objects.filter(id=instance.id).first()
+    if instance.id and not instance.image:  # PUT method, not changes image
+        instance.image = current_one.image
+
+pre_save.connect(variant_pre_save_receiver, sender=Variant)        
