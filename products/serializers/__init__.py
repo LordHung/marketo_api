@@ -1,3 +1,6 @@
 from .CategorySerializer import CategorySerializer
 from .ProductSerializer import ProductSerializer
+from .ProductImageSerializer import ProductImageSerializer
+from .ProductReviewSerializer import ProductReviewSerializer
 from .VariantSerializer import VariantSerializer
+from .TagSerializer import TagSerializer
