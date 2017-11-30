@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, m2m_changed
 
 from stores.models import Store
 
@@ -82,12 +82,13 @@ post_save.connect(product_post_saved_receiver, sender=Product)
 
 
 # Tạo category nếu user không nhập category
-def product_pre_save_receiver(sender, instance, *args, **kwargs):
-    product = instance
-    category = Category.objects.filter(title__startswith='Default')
-    if not category:
-        category = Category(title='Default')
-    if not product.categories:
-        product.categories = category
+# def product_categories_changed_receiver(sender, instance, *args, **kwargs):
+#     product = instance
+#     category = Category.objects.filter(title__startswith='Default')
+#     if not category:
+#         category = Category.objects.create(title='Default')
+#     if not product.categories:
+#         print(product, product.categories, category)
+#         product.categories = category
 
-pre_save.connect(product_post_saved_receiver, sender=Product)
+# pre_save.connect(product_pre_save_receiver, sender=Product)

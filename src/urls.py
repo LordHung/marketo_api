@@ -38,7 +38,7 @@ router.register(r'api/users', UserViewSet)
 router.register(r'api/stores', StoreViewSet)
 router.register(r'api/store-reviews', StoreReviewViewSet)
 router.register(r'api/categories', CategoryViewSet)
-router.register(r'api/products', ProductViewSet)
+# router.register(r'api/products', ProductViewSet)
 router.register(r'api/product-images', ProductImageViewSet)
 router.register(r'api/product-reviews', ProductReviewViewSet)
 router.register(r'api/variants', VariantViewSet)
@@ -48,6 +48,7 @@ urlpatterns = [
     url(r'^api/token/', obtain_jwt_token),
     url(r'^api/token/refresh-token/', refresh_jwt_token),
     url(r'^auth/', include('rest_framework.urls')),  # Default authen of DRF
+    url(r'^api/stores/(?P<pk>\d+)/products/$', ProductViewSet.as_view({'get': 'list'}), name='list-all-products')
     # url(r'^api/token/', TokenAuthView.as_view({'post': 'create'})),
     # url(r'^api/stores/', StoreAPIView.as_view(), name='store_index'),
     # url(r'^logout/', Logout.as_view()),

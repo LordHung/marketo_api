@@ -4,28 +4,32 @@ from stores.serializers import StoreSerializer
 
 from ..models import Product, ProductImage, Category
 from .VariantSerializer import VariantSerializer
-# from .CategorySerializer import CategorySerializer
+from .ProductImageSerializer import ProductImageSerializer
 
 
-class ProductImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductImage
-        # fields = ('id', 'image', )
-        fields = '__all__'
-
+# class ProductImageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = ProductImage
+#         # fields = ('id', 'image', )
+#         fields = '__all__'
+        
 
 class ProductSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='product-detail')
-    variant_set = VariantSerializer(many=True, read_only=True, required=False)
-    images = ProductImageSerializer(many=True, required=False)
-    # images = ProductImageSerializer(required=False)
+    # from .CategorySerializer import CategorySerializer
+    # url = serializers.HyperlinkedIdentityField(view_name='product-detail')
+    variant_set = VariantSerializer(many=True, required=False, read_only=True)
+    # image_set = ProductImageSerializer(many=True, required=False, read_only=True)
+    images = ProductImageSerializer(many=True, required=False, read_only=True)
+    # images = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=ProductImage.objects.all(), source='productimage_set')
+    category_ids = serializers.PrimaryKeyRelatedField(
+        many=True, read_only=False, queryset=Category.objects.all(), source='categories')
     # categories = serializers.SlugRelatedField(
     #     many=True,
     #     slug_field='title',
     #     queryset=Category.objects.all()
     # )
-    # categories = CategorySerializer(many=True)
-    # image = serializers.SerializerMethodField()
+    # categories = CategorySerializer(many=True, required=False, queryset=Category.objects.all())
+    # images = serializers.SerializerMethodField()
     # images = serializers.HyperlinkedRelatedField(
     #     many=True,
     #     read_only=True,
@@ -35,8 +39,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('url', 'id', 'store', 'title', 'images', 'price',
-                  'variant_set', 'short_description', 'long_description')
+        fields = ('id', 'store', 'title', 'price', 'images',
+                  'variant_set', 'category_ids', 'short_description', 'long_description')
         # fields = '__all__'
 
     def create(self, validated_data):
@@ -46,9 +50,17 @@ class ProductSerializer(serializers.ModelSerializer):
             ProductImage.objects.create(product=product, **image_data)
         return product
 
-    # def get_image(self, obj):
-    #     # return obj.productimage_set.first().image.url
-    #     try:
-    #         return obj.productimage_set.first().image.url
-    #     except:
-    #         return None
+    # def update(self, instance, validated_data):
+    #     product = Product.objects.get(id=instance.id)
+    #     categories_data = validated_data.pop('categories')
+    #     for category_data in categories_data:
+    #         Category.objects.update(product=product, **category_data)
+    #     Product.objects.update(**validated_data)
+    #     return product
+
+    def get_images(self, obj):
+        # return obj.productimage_set.first().image.url
+        try:
+            return obj.productimage_set.first().image.url
+        except:
+            return None
