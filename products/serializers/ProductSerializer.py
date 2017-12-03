@@ -7,19 +7,12 @@ from .VariantSerializer import VariantSerializer
 from .ProductImageSerializer import ProductImageSerializer
 
 
-# class ProductImageSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = ProductImage
-#         # fields = ('id', 'image', )
-#         fields = '__all__'
-        
-
 class ProductSerializer(serializers.ModelSerializer):
     # from .CategorySerializer import CategorySerializer
     # url = serializers.HyperlinkedIdentityField(view_name='product-detail')
     variant_set = VariantSerializer(many=True, required=False, read_only=True)
-    # image_set = ProductImageSerializer(many=True, required=False, read_only=True)
-    images = ProductImageSerializer(many=True, required=False, read_only=True)
+    productimage_set = ProductImageSerializer(many=True, required=False, read_only=True)
+    # images = ProductImageSerializer(many=True, required=False, read_only=True)
     # images = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=ProductImage.objects.all(), source='productimage_set')
     category_ids = serializers.PrimaryKeyRelatedField(
         many=True, read_only=False, queryset=Category.objects.all(), source='categories')
@@ -35,20 +28,29 @@ class ProductSerializer(serializers.ModelSerializer):
     #     read_only=True,
     #     view_name='product-image-detail'
     # )
+    # images = serializers.ListField(source='productimage_set.all')
+    # images = serializers.CharField(source='productimage_set.all')
     # store = StoreSerializer()
+    # images = serializers.SlugRelatedField(
+    #     many=True,
+    #     read_only=True,
+    #     slug_field='',
+    #     # queryset=ProductImage.objects.all(),
+    #     source='productimage_set.all'
+    # )
 
     class Meta:
         model = Product
-        fields = ('id', 'store', 'title', 'price', 'images',
+        fields = ('id', 'store', 'title', 'price', 'productimage_set',
                   'variant_set', 'category_ids', 'short_description', 'long_description')
         # fields = '__all__'
 
-    def create(self, validated_data):
-        images_data = validated_data.pop('images')
-        product = Product.objects.create(**validated_data)
-        for image_data in images_data:
-            ProductImage.objects.create(product=product, **image_data)
-        return product
+    # def create(self, validated_data):
+    #     images_data = validated_data.pop('images')
+    #     product = Product.objects.create(**validated_data)
+    #     for image_data in images_data:
+    #         ProductImage.objects.create(product=product, **image_data)
+    #     return product
 
     # def update(self, instance, validated_data):
     #     product = Product.objects.get(id=instance.id)
@@ -58,9 +60,10 @@ class ProductSerializer(serializers.ModelSerializer):
     #     Product.objects.update(**validated_data)
     #     return product
 
-    def get_images(self, obj):
-        # return obj.productimage_set.first().image.url
-        try:
-            return obj.productimage_set.first().image.url
-        except:
-            return None
+    # def get_images(self, obj):
+    #     # return obj.productimage_set.first().image.url
+    #     try:
+    #         # return obj.productimage_set.first().image.url
+    #         return obj.productimage_set.all()
+    #     except:
+    #         return None

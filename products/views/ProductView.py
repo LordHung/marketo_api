@@ -12,12 +12,12 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = ProductSerializer(data=request.DATA, files=request.FILES)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=HTTP_201_CREATED)
-        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+    # def create(self, request, *args, **kwargs):
+    #     serializer = ProductSerializer(data=request.DATA, files=request.FILES)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
     # @list_route()
     def list(self, request, *args, **kwargs):
@@ -29,4 +29,5 @@ class ProductViewSet(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
+        print(serializer)
         return Response(serializer.data)

@@ -24,4 +24,5 @@ class ProductImage(models.Model):
         db_table = 'product_image'
 
     def __str__(self):
-        return self.product.title
+        # return self.product.title
+        return self.image.url
