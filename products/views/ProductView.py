@@ -21,7 +21,11 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     # @list_route()
     def list(self, request, *args, **kwargs):
-        queryset = Product.objects.filter(id=self.kwargs.get('pk'))
+        try:
+            store_id = request.GET['store-id']
+            queryset = Product.objects.filter(store_id=store_id)
+        except:
+            queryset = Product.objects.all()
 
         page = self.paginate_queryset(queryset)
         if page is not None:

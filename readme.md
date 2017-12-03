@@ -5,3 +5,4 @@
 - Viewset của DRF không hiện được FileField/ImageField(chưa tìm ra cách), nên hiện tại dùng APIView cho các API có FileField
 - Reset sequence postgres:
 `ALTER SEQUENCE store_id_seq RESTART WITH 3;`
+- https://stackoverflow.com/questions/119312/urls-dash-vs-underscore
