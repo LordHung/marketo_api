@@ -10,7 +10,7 @@ from .ProductImageSerializer import ProductImageSerializer
 class ProductSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='product-detail')
     variant_set = VariantSerializer(many=True, required=False, read_only=True)
-    productimage_set = ProductImageSerializer(many=True, required=False, read_only=False)
+    productimage_set = ProductImageSerializer(many=True, required=False, read_only=True)
     category_ids = serializers.PrimaryKeyRelatedField(
         many=True, read_only=False, queryset=Category.objects.all(), source='categories')
 
