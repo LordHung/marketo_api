@@ -160,7 +160,7 @@ USE_TZ = True
 
 # Session expired after 10min
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 10 * 60
+# SESSION_COOKIE_AGE = 10 * 60
 LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
