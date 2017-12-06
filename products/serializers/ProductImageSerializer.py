@@ -5,4 +5,4 @@ from ..models import ProductImage
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
-        fields = ('image',)
+        fields = '__all__'
