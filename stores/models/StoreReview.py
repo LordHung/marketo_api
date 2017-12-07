@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from . import Store
+# from . import Store
 
 User = settings.AUTH_USER_MODEL
 
@@ -12,7 +12,7 @@ User = settings.AUTH_USER_MODEL
 #
 class StoreReview(models.Model):
     user = models.ForeignKey(User)
-    store = models.ForeignKey(Store)
+    store = models.ForeignKey('Store')
     rating = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
     comment = models.TextField(default='', blank=True, null=True)
     approved = models.BooleanField(default=True)

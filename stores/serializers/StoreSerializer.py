@@ -9,11 +9,9 @@ User = get_user_model()
 
 
 class StoreSerializer(serializers.ModelSerializer):
-    # user = ModelChoiceField(queryset=User.objects.all(), required=True)
     active = serializers.BooleanField(initial=True)
     url = serializers.HyperlinkedIdentityField(view_name='store-detail')
-    # user = serializers.CharField(source='user.email')
 
     class Meta:
         model = Store
-        fields = ('id', 'url', 'title', 'user', 'icon', 'active', )
+        fields = ('id', 'url', 'name', 'user', 'icon', 'active', )

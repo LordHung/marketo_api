@@ -55,7 +55,7 @@ class StoreManager(models.Manager):
 
 
 class Store(models.Model):
-    title = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
     user = models.OneToOneField(User)
     active = models.BooleanField(default=True)
     icon = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
@@ -71,4 +71,4 @@ class Store(models.Model):
         db_table = 'store'
 
     def __str__(self):
-        return self.title
+        return self.name
