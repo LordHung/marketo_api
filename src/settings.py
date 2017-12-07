@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     # our apps
     'accounts',
     'stores',
-    'products'
+    'products',
+    'wishlists'
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours

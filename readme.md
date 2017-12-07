@@ -6,3 +6,5 @@
 - Reset sequence postgres:
 `ALTER SEQUENCE store_id_seq RESTART WITH 3;`
 - https://stackoverflow.com/questions/119312/urls-dash-vs-underscore
+- Nên dùng thử django_cleanup để delete mấy tấm hình đi kèm vs instance
+- Null has no effect on manytomany field

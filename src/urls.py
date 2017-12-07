@@ -26,7 +26,8 @@ from rest_framework.documentation import include_docs_urls
 
 from accounts.views import UserViewSet, TokenAuthView
 from stores.views import StoreViewSet, StoreReviewViewSet, StoreAPIView
-from products.views import CategoryViewSet, ProductViewSet, VariantViewSet, TagViewSet, ProductImageViewSet, ProductReviewViewSet
+from products.views import CategoryViewSet, ProductViewSet, VariationViewSet, \
+TagViewSet, ImageViewSet, ProductReviewViewSet, AttributeViewSet
 
 from . import schema_generator
 
@@ -39,9 +40,10 @@ router.register(r'api/stores', StoreViewSet)
 router.register(r'api/store-reviews', StoreReviewViewSet)
 router.register(r'api/categories', CategoryViewSet)
 router.register(r'api/products', ProductViewSet)
-router.register(r'api/product-images', ProductImageViewSet)
+router.register(r'api/attributes', AttributeViewSet)
+router.register(r'api/images', ImageViewSet)
 router.register(r'api/product-reviews', ProductReviewViewSet)
-router.register(r'api/variants', VariantViewSet)
+router.register(r'api/variations', VariationViewSet)
 router.register(r'api/tags', TagViewSet)
 
 urlpatterns = [
