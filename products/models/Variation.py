@@ -20,10 +20,9 @@ def upload_image_path(instance, filename):
     return f'{user_email}/store/products/{product_title}/{title}{ext}'
 
 
-class Variant(models.Model):
-    from .Product import Product
-    product = models.ForeignKey(Product)
-    title = models.CharField(max_length=120)
+class Variation(models.Model):
+    product = models.ForeignKey('Product')
+    name = models.CharField(max_length=120)
     price = models.DecimalField(max_digits=20, decimal_places=2)
     sale_price = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     image = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
@@ -34,15 +33,15 @@ class Variant(models.Model):
     objects = models.Manager()
 
     class Meta:
-        db_table = 'variant'
+        db_table = 'variation'
     
     def __str__(self):
-        return self.title
+        return self.name
 
 
 def variant_pre_save_receiver(sender, instance, *args, **kwargs):
-    current_one = Variant.objects.filter(id=instance.id).first()
+    current_one = Variation.objects.filter(id=instance.id).first()
     if instance.id and not instance.image:  # PUT method, not changes image
         instance.image = current_one.image
 
-pre_save.connect(variant_pre_save_receiver, sender=Variant)        
+pre_save.connect(variant_pre_save_receiver, sender=Variation)        

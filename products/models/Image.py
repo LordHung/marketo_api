@@ -5,8 +5,6 @@ from django.utils.text import slugify
 
 from src.utils import get_filename_ext
 
-from .Product import Product
-
 
 def upload_image_path(instance, filename):
     random_name = random.randint(1, 3910209312)
@@ -16,8 +14,8 @@ def upload_image_path(instance, filename):
     return f'{user_email}/store/products/{title}/{random_name}{ext}'
 
 
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product)
+class Image(models.Model):
+    product = models.ForeignKey('Product')
     image = models.ImageField(upload_to=upload_image_path)
 
     class Meta:

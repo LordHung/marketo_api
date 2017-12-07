@@ -1,15 +1,12 @@
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_save, pre_save, m2m_changed
-
-from stores.models import Store
-
-from .Category import Category
+from django.db.models.signals import post_save
+# from django.core.validators import MinValueValidator
 
 
 class ProductQuerySet(models.query.QuerySet):
     def active(self):
-        return self.filter(active=True)
+        return self.filter(purchasable=True)
 
     def search(self, query):
         lookups = (Q(title__icontains=query) |
@@ -37,58 +34,56 @@ class ProductManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
+STATUS = (
+    ('out-of-stock', 'Out of stock'),
+    ('available', 'Available'),
+)
+
 
 class Product(models.Model):
-    title = models.CharField(max_length=120)
-    store = models.ForeignKey(Store)
-    categories = models.ManyToManyField(Category, blank=True)
+    name = models.CharField(max_length=120)
+    store = models.ForeignKey('stores.Store')
+    categories = models.ManyToManyField('Category', blank=True)
+    tags = models.ManyToManyField('Tag', blank=True)
+    attributes = models.ManyToManyField('Attribute', blank=True)
+
     price = models.DecimalField(max_digits=20, decimal_places=2)
+    on_sale = models.BooleanField(default=False)
+    sale_price = models.DecimalField(max_digits=20, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=0)
+    description = models.TextField(blank=True, null=True)
     short_description = models.TextField(blank=True, null=True)
-    long_description = models.TextField(blank=True, null=True)
-    active = models.BooleanField(default=True)
+    status = models.CharField(max_length=50, choices=STATUS)
+
+    purchasable = models.BooleanField(default=True)
+    reviews_allowed = models.BooleanField(default=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     # slug = models.SlugField(blank=True, unique=True)
-    # default = models.ForeignKey('Subcategories', related_name='default_category', blank=True, null=True)
-    # featured = models.BooleanField(default=False)
-    # subcategories = models.ManyToManyField(Subcategory, blank=True)
 
     objects = ProductManager()
 
     class Meta:
         db_table = 'product'
-        ordering = ['-title']
+        ordering = ['-name']
 
     def __str__(self):
-        return self.title
+        return self.name
 
     def get_image_url(self):
-        img = self.productimage_set.first()
+        img = self.image_set.first()
         if img:
             return img.image.url
         return img  # None
 
 
-# Tạo variant default nếu user không nhập variant
+# Tạo variation default nếu user không nhập variation
 def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
-    from .Variant import Variant
+    from .Variation import Variation
     product = instance
-    variants = product.variant_set.all()
-    if variants.count() == 0:
-        default_variant = Variant(product=product, title='Default', price=product.price)
-        default_variant.save()
+    variations = product.variation_set.all()
+    if variations.count() == 0:
+        default_variation = Variation(product=product, name='Default', price=product.price)
+        default_variation.save()
 
 post_save.connect(product_post_saved_receiver, sender=Product)
-
-
-# Tạo category nếu user không nhập category
-# def product_categories_changed_receiver(sender, instance, *args, **kwargs):
-#     product = instance
-#     category = Category.objects.filter(title__startswith='Default')
-#     if not category:
-#         category = Category.objects.create(title='Default')
-#     if not product.categories:
-#         print(product, product.categories, category)
-#         product.categories = category
-
-# pre_save.connect(product_pre_save_receiver, sender=Product)
