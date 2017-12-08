@@ -9,3 +9,6 @@ class AttributeOptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Option
         fields = '__all__'
+
+    def to_representation(self, value):
+        return value.name

@@ -12,3 +12,9 @@ class AttributeSerializer(serializers.ModelSerializer):
         model = Attribute
         # fields = '__all__'
         fields = ('id', 'url', 'name', 'option_set')
+
+    def to_representation(self, value):
+        data = super(AttributeSerializer, self).to_representation(value)
+        return {
+            data['name']: data['option_set']
+        }
