@@ -11,8 +11,8 @@ User = settings.AUTH_USER_MODEL
 # reason: https://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/
 #
 class StoreReview(models.Model):
-    user = models.ForeignKey(User)
-    store = models.ForeignKey('Store')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    store = models.ForeignKey('Store', on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
     comment = models.TextField(default='', blank=True, null=True)
     approved = models.BooleanField(default=True)

@@ -15,9 +15,6 @@ from ..serializers import StoreReviewSerializer, StoreSerializer
 
 class StoreAPIView(APIView):
     filter_backends = (filter_backends.StoreFilterBackend, )
-    # parser_classes = (parsers.FormParser, parsers.MultiPartParser)
-    # queryset = Store.objects.all()
-    # serializer_class = StoreSerializer
 
     def post(self, request, *args, **kwargs):
         """
@@ -29,8 +26,6 @@ class StoreAPIView(APIView):
               required: true
               type: file
         """
-        # image = request_processing.add_image2(request)
-        # return super(StoreAPIView, self).post(self, *args, **kwargs)
         serializer = StoreSerializer()
         messages.success(request, 'Image uploaded successfully.')
         return response.Response(serializer.data, status=status.HTTP_201_CREATED)
