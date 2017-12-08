@@ -1,0 +1,1 @@
+from .WishListView import WishListViewset
