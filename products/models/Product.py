@@ -35,8 +35,8 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
 
 STATUS = (
-    ('out-of-stock', 'Out of stock'),
     ('available', 'Available'),
+    ('out-of-stock', 'Out of stock'),
 )
 
 
