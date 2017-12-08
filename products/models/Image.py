@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from src.utils import get_filename_ext
+from src.settings import MEDIA_URL
 
 
 def upload_image_path(instance, filename):

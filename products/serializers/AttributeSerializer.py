@@ -15,6 +15,7 @@ class AttributeSerializer(serializers.ModelSerializer):
 
     def to_representation(self, value):
         data = super(AttributeSerializer, self).to_representation(value)
-        return {
-            data['name']: data['option_set']
-        }
+        return data
+        # return {
+        #     data['name']: data['option_set']
+        # }

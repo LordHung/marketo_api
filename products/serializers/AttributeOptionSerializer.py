@@ -11,4 +11,8 @@ class AttributeOptionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def to_representation(self, value):
-        return value.name
+        data = super(AttributeOptionSerializer, self).to_representation(value)
+        return data['name']
+        # return {
+        #     data['name']
+        # }
