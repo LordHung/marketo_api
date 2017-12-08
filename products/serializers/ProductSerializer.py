@@ -14,8 +14,6 @@ class ProductSerializer(serializers.ModelSerializer):
     image_set = ImageSerializer(many=True, required=False, read_only=True)
     category_ids = serializers.PrimaryKeyRelatedField(
         many=True, read_only=False, queryset=Category.objects.all(), source='categories')
-    # attribute_ids = serializers.PrimaryKeyRelatedField(
-    #     many=True, read_only=False, queryset=Attribute.objects.all(), source='attributes')
     attributes = AttributeSerializer(many=True, read_only=True)
     tag_ids = serializers.PrimaryKeyRelatedField(
         many=True, read_only=False, queryset=Tag.objects.all(), source='tags')

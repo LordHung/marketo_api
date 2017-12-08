@@ -9,9 +9,9 @@ from src.utils import get_filename_ext
 def upload_image_path(instance, filename):
     random_name = random.randint(1, 3910209312)
     user_email = slugify(instance.product.store.user.email)  # test@gmail.com -> testgmailcom
-    title = slugify(instance.product.title)  # nike-star-abc
+    name = slugify(instance.product.name)  # nike-star-abc
     name, ext = get_filename_ext(filename)  # .png, .jpg
-    return f'{user_email}/store/products/{title}/{random_name}{ext}'
+    return f'{user_email}/store/products/{name}/{random_name}{ext}'
 
 
 class Image(models.Model):

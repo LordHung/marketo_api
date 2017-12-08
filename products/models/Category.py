@@ -7,13 +7,13 @@ from src.settings import MEDIA_ROOT
 
 def upload_image_path(instance, filename):
     user_email = slugify(instance.product.store.user.email)  # test@gmail.com -> testgmailcom
-    title = slugify(instance.title)  # nike-star-abc
+    name = slugify(instance.name)  # nike-star-abc
     name, ext = get_filename_ext(filename)  # .png, .jpg
-    image_path = f'{MEDIA_ROOT}/{user_email}/store/categories/{title}{ext}'
+    image_path = f'{MEDIA_ROOT}/{user_email}/store/categories/{name}{ext}'
     # REMOVE EXISTS IMAGE DIR
     if os.path.exists(image_path) and instance.image:
         os.remove(image_path)
-    return f'{user_email}/store/categories/{title}{ext}'
+    return f'{user_email}/store/categories/{name}{ext}'
 
 
 class Category(models.Model):

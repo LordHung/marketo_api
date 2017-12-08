@@ -17,14 +17,14 @@ User = settings.AUTH_USER_MODEL
 
 def upload_image_path(instance, filename):
     user_email = slugify(instance.user.email)  # test@gmail.com -> testgmailcom
-    title = slugify(instance.title)  # nike-star-abc
+    name = slugify(instance.name)  # nike-star-abc
     name, ext = get_filename_ext(filename)  # .png, .jpg
     # email là unique
     image_path = f'{MEDIA_ROOT}/{user_email}/store/icon/'
     # REMOVE EXISTS IMAGE DIR
     if os.path.exists(image_path):
         shutil.rmtree(image_path)
-    return f'{user_email}/store/icon/{title}{ext}'
+    return f'{user_email}/store/icon/{name}{ext}'
 
 
 class StoreQuerySet(models.query.QuerySet):
@@ -32,7 +32,7 @@ class StoreQuerySet(models.query.QuerySet):
         return self.filter(active=True)
 
     def search(self, query):
-        lookups = Q(title__icontains=query)  # Q(tag__title__icontains=query))
+        lookups = Q(name__icontains=query)  # Q(tag__name__icontains=query))
         # shop abc, xyz, quan ao, giay dep
         return self.filter(lookups).distinct()
 
