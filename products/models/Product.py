@@ -42,7 +42,7 @@ STATUS = (
 
 class Product(models.Model):
     name = models.CharField(max_length=120)
-    store = models.ForeignKey('stores.Store')
+    store = models.ForeignKey('stores.Store', on_delete=models.CASCADE)
     categories = models.ManyToManyField('Category', blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
     attributes = models.ManyToManyField('Attribute', blank=True)

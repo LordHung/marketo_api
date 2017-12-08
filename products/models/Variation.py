@@ -21,7 +21,7 @@ def upload_image_path(instance, filename):
 
 
 class Variation(models.Model):
-    product = models.ForeignKey('Product')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
     name = models.CharField(max_length=120)
     price = models.DecimalField(max_digits=20, decimal_places=2)
     sale_price = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
