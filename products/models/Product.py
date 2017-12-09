@@ -86,4 +86,4 @@ def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
         default_variation = Variation(product=product, name='Default', price=product.price)
         default_variation.save()
 
-post_save.connect(product_post_saved_receiver, sender=Product)
+# post_save.connect(product_post_saved_receiver, sender=Product)

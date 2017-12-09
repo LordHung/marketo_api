@@ -8,3 +8,5 @@
 - https://stackoverflow.com/questions/119312/urls-dash-vs-underscore
 - Nên dùng thử django_cleanup để delete mấy tấm hình đi kèm vs instance
 - Null has no effect on manytomany field
+- Tạm thời bỏ qua Variation, vì thực tế người ta sẽ add các variation như 1 product riêng biệt
+vd: Giày converse navy(đen), giaỳ converse navy 'trắng'
