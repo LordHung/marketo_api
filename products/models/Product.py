@@ -1,7 +1,7 @@
+from decimal import Decimal
 from django.db import models
+from django.urls import reverse
 from django.db.models import Q
-from django.db.models.signals import post_save
-# from django.core.validators import MinValueValidator
 
 
 class ProductQuerySet(models.query.QuerySet):
@@ -33,6 +33,7 @@ class ProductManager(models.Manager):
 
     def search(self, query):
         return self.get_queryset().active().search(query)
+
 
 STATUS = (
     ('available', 'Available'),
@@ -75,6 +76,14 @@ class Product(models.Model):
         if img:
             return img.image.url
         return img  # None
+
+    def add_to_cart(self):
+        # return f'{reverse('cart')}?item={self.id}&qty=1'
+        return '%s?item=%s&qty=1' % (reverse('cart'), self.id)
+
+    def remove_from_cart(self):
+        return '%s?item=%s&qty=1&delete=True' % (reverse('cart'), self.id)
+    # TODO: Làm tương tự cho wishlist
 
 
 # Tạo variation default nếu user không nhập variation
