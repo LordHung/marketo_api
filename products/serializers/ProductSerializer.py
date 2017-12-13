@@ -19,12 +19,33 @@ class ProductSerializer(serializers.ModelSerializer):
     attributes = AttributeSerializer(many=True, read_only=True)
     tag_ids = serializers.PrimaryKeyRelatedField(
         many=True, read_only=False, queryset=Tag.objects.all(), source='tags')
+    average_rating = serializers.SerializerMethodField()
+    rating_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
-        fields = ('id', 'url', 'store', 'name', 'status', 'price', 'on_sale', 'sale_price', 'image_set',
-                'category_ids', 'attributes', 'tag_ids', 'variation_set', 'description', 'short_description', )
+        fields = ('id', 'url', 'store', 'name', 'status', 'price', 'on_sale', 'sale_price', 'image_set', 'category_ids',
+                  'attributes', 'tag_ids', 'variation_set', 'description', 'average_rating', 'rating_count', 
+                  'short_description', )
+    
+    def get_average_rating(self, obj):
+        average_rating = 0.0
 
+        for review in obj.review_set.all():
+            average_rating += review.rating
+        user_count = obj.review_set.count()
+        try:
+            return average_rating / user_count
+        except ZeroDivisionError:
+            return 0.0
+    
+    def get_rating_count(self, obj):
+        rating_count = 0
+
+        return obj.review_set.count()
+
+
+    # Dùng để post multiple images, impl later
     # def create(self, validated_data):
     #     images_data = validated_data.pop('productimage_set')
     #     product = Product.objects.create(**validated_data)
