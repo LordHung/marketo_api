@@ -4,6 +4,10 @@ from ..models import Review
 
 
 class ProductReviewSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='review-detail')
+    user_name = serializers.CharField(source='user.full_name', read_only=True)
+
     class Meta:
         model = Review
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ('url', 'id', 'user', 'user_name', 'product', 'rating', 'comment', 'updated')
