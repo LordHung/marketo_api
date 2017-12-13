@@ -56,7 +56,7 @@ class StoreManager(models.Manager):
 
 class Store(models.Model):
     name = models.CharField(max_length=255)
-    user = models.OneToOneField(User, on_delete=None)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     icon = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
     views_count = models.PositiveIntegerField(default=0, null=True)
