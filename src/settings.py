@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -116,6 +117,22 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'src.pagination.CustomPagination',
     'PAGE_SIZE': 10
+}
+
+def jwt_response_payload_handler(token, user, request, *args, **kwargs):
+    data = {
+        'token': token,
+        'user-id': user.id,
+        'active': user.is_active
+    }
+    return data
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': jwt_response_payload_handler,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=180),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30),
+    'JWT_SECRET_KEY': 'generate_a_secret_key',
 }
 
 # Swagger Settings
