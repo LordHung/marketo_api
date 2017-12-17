@@ -122,10 +122,14 @@ REST_FRAMEWORK = {
 def jwt_response_payload_handler(token, user, request, *args, **kwargs):
     data = {
         'token': token,
-        'user-id': user.id,
-        'active': user.is_active
+        'user': {
+            'id': user.id,
+            'active': user.is_active
+        }
     }
     return data
+
+# APPEND_SLASH = False
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': jwt_response_payload_handler,
