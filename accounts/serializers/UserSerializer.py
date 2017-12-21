@@ -2,7 +2,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-# from accounts.models.User import User
+from billings.serializers import BillingProfileSerializer
+from addresses.serializers import AddressSerializer
+
 
 User = get_user_model()
 
@@ -13,15 +15,17 @@ class UserSerializer(ModelSerializer):
         style={'input_type': 'password'},
         write_only=True,  # <- never send password (or hash) to the client
     )
+    billing = BillingProfileSerializer(read_only=True)
 
     class Meta:
         model = User
-        fields = ('url', 'email', 'password', 'full_name')
+        fields = ('url', 'email', 'password', 'full_name', 'phone', 'billing')
     
     def create(self, validated_data):
-        user = User.objects.create(
-            email=validated_data['email'],
-            full_name=validated_data['full_name'],
-            password=make_password(validated_data['password'])
-        )
-        return user
+        validated_data['password'] = make_password(validated_data['password'])
+        return super(UserSerializer, self).create(validated_data)
+
+    def update(self, instance, validated_data):
+        print(validated_data)
+        validated_data['password'] = make_password(validated_data['password'])
+        return super(UserSerializer, self).update(instance, validated_data)
