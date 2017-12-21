@@ -36,17 +36,17 @@ class Address(models.Model):
 
     def get_short_address(self):
         for_name = self.name
-        return "{for_name} {line1}, {city}".format(
-            for_name=for_name or "",
+        return '{for_name} {line1}, {city}'.format(
+            for_name=for_name or '',
             line1=self.address_line_1,
             city=self.city
         )
 
     def get_address(self):
-        return "{for_name}\n{line1}\n{line2}\n{city}\n{state}, {postal}\n{country}".format(
-            for_name=self.name or "",
+        return '{for_name}\n{line1}\n{line2}\n{city}\n{state}, {postal}\n{country}'.format(
+            for_name=self.name or '',
             line1=self.address_line_1,
-            line2=self.address_line_2 or "",
+            line2=self.address_line_2 or '',
             city=self.city,
             state=self.state,
             postal=self.postal_code,

@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from ..models import BillingProfile
+from addresses.serializers import AddressSerializer
 
 
 class BillingProfileSerializer(serializers.ModelSerializer):
-    # email = serializers.EmailField(default='user.email')
-    # url = serializers.HyperlinkedIdentityField(view_name='billings:billing-detail')
+    address_set = AddressSerializer(read_only=True, many=True)
 
     class Meta:
         model = BillingProfile
