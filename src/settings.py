@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'accounts',
     'stores',
     'products',
-    'wishlists'
+    'wishlists',
+    'billings',
+    'addresses',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
@@ -118,6 +120,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'src.pagination.CustomPagination',
     'PAGE_SIZE': 10
 }
+
 
 def jwt_response_payload_handler(token, user, request, *args, **kwargs):
     data = {

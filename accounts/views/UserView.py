@@ -14,12 +14,3 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-pk')
     serializer_class = UserSerializer
     permission_classes = (IsAccountOwnerOrNoModify, )
-
-    # def get_permissions(self):
-    #     # Your logic should be all here
-    #     if self.request.method == 'GET':
-    #         self.permission_classes = [, ]
-    #     else:
-    #         self.permission_classes = [IsAuthenticated, ]
-
-    #     return super(UsersViewSet, self).get_permissions()
