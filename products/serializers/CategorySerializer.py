@@ -8,7 +8,7 @@ from .ProductSerializer import ProductSerializer
 
 class CategorySerializer(ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='category-detail')
-    product_set = ProductSerializer(many=True, read_only=True)
+    # product_set = ProductSerializer(many=True, read_only=True)
     
     class Meta:
         model = Category
