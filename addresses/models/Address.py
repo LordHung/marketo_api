@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from billings.models import BillingProfile
 
 
 ADDRESS_TYPES = (
@@ -10,7 +9,7 @@ ADDRESS_TYPES = (
 
 
 class Address(models.Model):
-    billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)
+    billing_profile = models.ForeignKey('billings.BillingProfile', on_delete=models.CASCADE)
     name = models.CharField(max_length=120, null=True,
                             blank=True, help_text='Shipping to? Who is it for?')
     address_type = models.CharField(max_length=120, choices=ADDRESS_TYPES)
