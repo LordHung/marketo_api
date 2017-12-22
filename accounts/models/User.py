@@ -1,6 +1,20 @@
+import os
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.hashers import make_password
+from django.utils.text import slugify
+from src.utils import get_filename_ext
+from src.settings import MEDIA_ROOT
+
+
+def upload_image_path(instance, filename):
+    user_email = slugify(instance.email)
+    name, ext = get_filename_ext(filename)
+    image_path = f'{MEDIA_ROOT}/{user_email}/avatar/{name}{ext}'
+    if os.path.exists(image_path) and instance.avatar:
+        os.remove(image_path)
+    return f'{user_email}/avatar/{name}{ext}'
 
 
 class UserManager(BaseUserManager):
@@ -39,6 +53,7 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)  # can login
     staff = models.BooleanField(default=False)  # staff user non superuser
     admin = models.BooleanField(default=False)  # super user
+    avatar = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     # Username and password field is required by default
