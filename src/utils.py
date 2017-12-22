@@ -7,7 +7,7 @@ from django.utils.text import slugify
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
     name, ext = os.path.splitext(base_name)
-    return name, ext
+    return slugify(name), ext
 
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
