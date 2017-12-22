@@ -28,7 +28,6 @@ from accounts.views import UserViewSet, TokenAuthView
 from stores.views import StoreViewSet, StoreReviewViewSet, StoreAPIView
 from products.views import CategoryViewSet, ProductViewSet, VariationViewSet, TagViewSet, \
                             ImageViewSet, ProductReviewViewSet, AttributeViewSet, AttributeOptionViewSet
-from wishlists.views import WishListViewset
 from billings.views import BillingProfileViewSet
 from addresses.views import AddressViewSet
 
@@ -49,8 +48,7 @@ router.register(r'api/attribute-options', AttributeOptionViewSet)
 router.register(r'api/variations', VariationViewSet)
 router.register(r'api/tags', TagViewSet)
 router.register(r'api/images', ImageViewSet)
-router.register(r'api/wishlist', WishListViewset)
-router.register(r'api/billings', BillingProfileViewSet, base_name='billings')
+router.register(r'api/billings', BillingProfileViewSet)
 router.register(r'api/addresses', AddressViewSet)
 
 urlpatterns = [

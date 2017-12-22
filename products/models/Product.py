@@ -76,14 +76,6 @@ class Product(models.Model):
             return img.image.url
         return img  # None
 
-    def add_to_cart(self):
-        # return f'{reverse('cart')}?item={self.id}&qty=1'
-        return '%s?item=%s&qty=1' % (reverse('cart'), self.id)
-
-    def remove_from_cart(self):
-        return '%s?item=%s&qty=1&delete=True' % (reverse('cart'), self.id)
-    # TODO: Làm tương tự cho wishlist
-
 
 # Tạo variation default nếu user không nhập variation
 def product_post_saved_receiver(sender, instance, created, *args, **kwargs):
