@@ -24,9 +24,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'url', 'store', 'name', 'status', 'price', 'on_sale', 'sale_price', 'image_set', 'category_ids',
+        fields = ('id', 'url', 'store', 'name', 'status', 'price', 'on_sale', 'sale_price', 'category_ids',
                   'attributes', 'tag_ids', 'variation_set', 'description', 'average_rating', 'rating_count', 
-                  'short_description', )
+                  'short_description', 'updated', 'timestamp', 'image_set',)
     
     def get_average_rating(self, obj):
         average_rating = 0.0
@@ -40,8 +40,6 @@ class ProductSerializer(serializers.ModelSerializer):
             return 0.0
     
     def get_rating_count(self, obj):
-        rating_count = 0
-
         return obj.review_set.count()
 
 

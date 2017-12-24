@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from rest_framework.decorators import list_route
+from django.utils.datastructures import MultiValueDictKeyError
+from django.db.models.query import EmptyQuerySet
 
 from ..models import Product
 
@@ -21,17 +23,24 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     # @list_route()
     def list(self, request, *args, **kwargs):
+        store_id = category_id = None
+        queryset = Product.objects.all()
+        params = request.query_params
         try:
-            store_id = request.GET['store-id']
-            queryset = Product.objects.filter(store_id=store_id)
-        except:
+            if 'store-id' in params:
+                store_id = params['store-id']
+                queryset = Product.objects.filter(store_id=store_id)
+            elif 'category-id' in params:
+                category_id = params['category-id']
+                queryset = Product.objects.filter(categories__id=category_id)
+        except MultiValueDictKeyError:
             queryset = Product.objects.all()
 
+        # return super(ProductViewSet, self).list(request, *args, **kwargs)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
-        print(serializer)
         return Response(serializer.data)
