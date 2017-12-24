@@ -18,10 +18,12 @@ def upload_image_path(instance, filename):
 
 class Category(models.Model):
     name = models.CharField(max_length=120, unique=True)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
     store = models.ForeignKey('stores.Store', on_delete=models.CASCADE, null=True)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to=upload_image_path, blank=True, null=True)
     active = models.BooleanField(default=True)
+    updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(blank=True, null=True)
 
