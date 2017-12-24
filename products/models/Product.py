@@ -49,7 +49,7 @@ class Product(models.Model):
 
     price = models.DecimalField(max_digits=20, decimal_places=2)
     on_sale = models.BooleanField(default=False)
-    sale_price = models.DecimalField(max_digits=20, decimal_places=2)
+    sale_price = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     quantity = models.PositiveIntegerField(default=0)
     description = models.TextField(blank=True, null=True)
     short_description = models.TextField(blank=True, null=True)
