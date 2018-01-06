@@ -27,9 +27,10 @@ from rest_framework.documentation import include_docs_urls
 from accounts.views import UserViewSet, TokenAuthView
 from stores.views import StoreViewSet, StoreReviewViewSet, StoreAPIView
 from products.views import CategoryViewSet, ProductViewSet, VariationViewSet, TagViewSet, \
-                            ImageViewSet, ProductReviewViewSet, AttributeViewSet, AttributeOptionViewSet
+    ImageViewSet, ProductReviewViewSet, AttributeViewSet, AttributeOptionViewSet
 from billings.views import BillingProfileViewSet
 from addresses.views import AddressViewSet
+from orders.views import OrderViewSet
 
 from . import schema_generator
 
@@ -50,6 +51,7 @@ router.register(r'api/tags', TagViewSet)
 router.register(r'api/images', ImageViewSet)
 router.register(r'api/billings', BillingProfileViewSet)
 router.register(r'api/addresses', AddressViewSet)
+router.register(r'api/orders', OrderViewSet)
 
 urlpatterns = [
     url(r'^api/token/', obtain_jwt_token),

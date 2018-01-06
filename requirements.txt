@@ -1,7 +1,6 @@
 # Django
 Django==2.0
-djangorestframework==3.7.3
-# djangorestframework==3.6.4
+djangorestframework==3.7.7
 django-rest-swagger==2.1.2  # API Documentation
 djangorestframework-jwt==1.11.0  # JSON Web Token for DRF
 django-adminlte2==0.1.6  # Beautiful Admin Page
@@ -20,3 +19,5 @@ django-redis==4.8.0
 requests==2.18.4
 Pillow==4.3  # Upload image
 ipython==6.2.1
+whitenoise==3.3.1 # Serve static files
+html-json-forms==1.0.0django-adminlte2==0.1.6
