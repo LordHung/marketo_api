@@ -10,8 +10,8 @@ class OrderSerializer(serializers.ModelSerializer, ):
 
     class Meta:
         model = Order
-        fields = ('id', 'customer', 'active', 'billing_address', 'shipping_address', 'payment_method',
-                  'payment_method_title', 'shipping_total', 'total', 'customer_note', 'lineitem_set', )
+        fields = ('id', 'customer', 'active', 'status', 'billing_address', 'shipping_address', 'payment_method',
+                  'payment_method_title', 'shipping_total', 'total', 'currency', 'customer_note', 'lineitem_set', )
 
     def create(self, validated_data):
         lineitems = validated_data.pop('lineitem_set')
