@@ -16,6 +16,11 @@ PAYMENT_METHOD_CHOICES = (
     ('paypal', 'Paypal'),
 )
 
+CURRENCY_CHOICES = (
+    ('vnd', 'VND'),
+    ('usd', 'USD'),
+)
+
 
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -30,6 +35,7 @@ class Order(models.Model):
     shipping_total = models.DecimalField(
         default=20000.00, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    currency = models.CharField(max_length=50, default='VND')
     active = models.BooleanField(default=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
