@@ -26,6 +26,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         store_id = category_id = None
         queryset = Product.objects.all()
         params = request.query_params
+        # print(params)
         try:
             if 'store-id' in params:
                 store_id = params['store-id']
@@ -33,6 +34,9 @@ class ProductViewSet(viewsets.ModelViewSet):
             elif 'category-id' in params:
                 category_id = params['category-id']
                 queryset = Product.objects.filter(categories__id=category_id)
+            elif 'search' in params:
+                product_name = params['search']
+                queryset = Product.objects.filter(name__icontains=product_name)
         except MultiValueDictKeyError:
             queryset = Product.objects.all()
 
