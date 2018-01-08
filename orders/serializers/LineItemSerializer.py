@@ -4,7 +4,6 @@ from ..models import LineItem
 
 
 class LineItemSerializer(serializers.ModelSerializer):
-    # product_id = serializers.CharField(source='product.id')
     total = serializers.SerializerMethodField()
     name = serializers.CharField(source='product.name', read_only=True)
     class Meta:
