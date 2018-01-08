@@ -4,12 +4,12 @@ from ..models import LineItem
 
 
 class LineItemSerializer(serializers.ModelSerializer):
-    product_id = serializers.CharField(source='product.id')
+    # product_id = serializers.CharField(source='product.id')
     total = serializers.SerializerMethodField()
-    name = serializers.CharField(source='product.name')
+    name = serializers.CharField(source='product.name', read_only=True)
     class Meta:
         model = LineItem
-        fields = ('product_id', 'name', 'quantity', 'total', 'refunded')
+        fields = ('product', 'name', 'quantity', 'total', 'refunded')
 
     def get_total(self, object):
         try:

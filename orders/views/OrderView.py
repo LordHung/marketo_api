@@ -29,5 +29,4 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
-    	print(self.request)
-    	return super(OrderViewSet, self).list(request, *args, **kwargs)
+    	return super(OrderViewSet, self).post(request, *args, **kwargs)

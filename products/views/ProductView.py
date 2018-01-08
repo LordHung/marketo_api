@@ -21,7 +21,6 @@ class ProductViewSet(viewsets.ModelViewSet):
     #         return Response(serializer.data, status=HTTP_201_CREATED)
     #     return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
-    # @list_route()
     def list(self, request, *args, **kwargs):
         store_id = category_id = None
         queryset = Product.objects.all()
@@ -40,7 +39,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         except MultiValueDictKeyError:
             queryset = Product.objects.all()
 
-        # return super(ProductViewSet, self).list(request, *args, **kwargs)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
