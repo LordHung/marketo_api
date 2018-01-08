@@ -35,8 +35,8 @@ class ProductViewSet(viewsets.ModelViewSet):
                 category_id = params['category-id']
                 queryset = Product.objects.filter(categories__id=category_id)
             elif 'search' in params:
-                product_name = params['search']
-                queryset = Product.objects.filter(name__icontains=product_name)
+                search_query = params['search']
+                queryset = Product.objects.search(search_query)
         except MultiValueDictKeyError:
             queryset = Product.objects.all()
 
