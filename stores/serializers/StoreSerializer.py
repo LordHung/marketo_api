@@ -11,7 +11,8 @@ User = get_user_model()
 class StoreSerializer(serializers.ModelSerializer):
     active = serializers.BooleanField(initial=True)
     url = serializers.HyperlinkedIdentityField(view_name='store-detail')
+    product_count = serializers.IntegerField(source='product_set.count')
 
     class Meta:
         model = Store
-        fields = ('id', 'url', 'name', 'user', 'icon', 'active', )
+        fields = ('id', 'url', 'name', 'user', 'icon', 'active', 'product_count', 'timestamp', 'updated' )
