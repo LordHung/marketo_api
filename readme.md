@@ -11,3 +11,4 @@
 - Tạm thời bỏ qua Variation, vì thực tế người ta sẽ add các variation như 1 product riêng biệt
 vd: Giày converse navy(đen), giaỳ converse navy 'trắng'
 - Browsable API của DRF vẫn chưa support List HTML input, nên tạm thời ko set many=True với nested serializer
+- Decimal field ko thể set choices option, nên dùng tạm FloatField
