@@ -72,3 +72,6 @@ class Store(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_discounts_count(self):
+        return self.product_set.filter(on_sale=True).count()
