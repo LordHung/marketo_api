@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.db.models import Q
+# from django.db.models.signals import pre_save, post_save
+
+# from ..models import Review
 
 
 class ProductQuerySet(models.query.QuerySet):
@@ -59,6 +62,7 @@ class Product(models.Model):
     reviews_allowed = models.BooleanField(default=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    average_rating = models.DecimalField(default=0.0, decimal_places=1, max_digits=3)
     # slug = models.SlugField(blank=True, unique=True)
 
     objects = ProductManager()
