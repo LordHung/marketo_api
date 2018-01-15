@@ -1,9 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.db.models import Q
-# from django.db.models.signals import pre_save, post_save
-
-# from ..models import Review
+from django.db.models.signals import pre_save
 
 
 class ProductQuerySet(models.query.QuerySet):
@@ -54,6 +52,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=20, decimal_places=2)
     on_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
+    sale_rate = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     quantity = models.PositiveIntegerField(default=0)
     sold = models.PositiveIntegerField(default=0, null=True)
     description = models.TextField(blank=True, null=True)
@@ -81,6 +80,17 @@ class Product(models.Model):
         if img:
             return img.image.url
         return img  # None
+
+
+def calculate_sale_rate_receiver(sender, instance, *args, **kwargs):
+    from math import ceil
+    try:
+        if instance.on_sale:
+            instance.sale_rate = round((1 - instance.sale_price / instance.price), 2)
+    except expression as identifier:
+        pass
+
+pre_save.connect(calculate_sale_rate_receiver, sender=Product)
 
 
 # Tạo variation default nếu user không nhập variation

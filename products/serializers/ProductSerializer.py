@@ -20,11 +20,15 @@ class ProductSerializer(serializers.ModelSerializer):
     tag_ids = serializers.PrimaryKeyRelatedField(
         many=True, read_only=False, queryset=Tag.objects.all(), source='tags')
     rating_count = serializers.IntegerField(source='review_set.count', read_only=True)
+    sold = serializers.IntegerField(read_only=True)
+    sale_rate = serializers.FloatField(read_only=True)
+    average_rating = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Product
-        fields = ('id', 'url', 'store', 'name', 'status', 'purchasable', 'price', 'on_sale', 'sale_price', 
-                  'category_ids', 'attributes', 'tag_ids', 'variation_set', 'description', 'average_rating',
+        ordering = ('id',)
+        fields = ('id', 'url', 'store', 'name', 'status', 'purchasable', 'price', 'on_sale', 'sale_price', 'sale_rate', 
+                  'quantity', 'sold', 'category_ids', 'attributes', 'tag_ids', 'variation_set', 'description', 'average_rating',
                   'rating_count', 'short_description', 'updated', 'timestamp', 'image_set',)
     
     # Dùng để post multiple images, impl later
