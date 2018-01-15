@@ -14,7 +14,8 @@ class ProductQuerySet(models.query.QuerySet):
         lookups = (Q(name__icontains=query) |
                    Q(description__icontains=query) |
                    Q(price__icontains=query) |
-                   Q(tags__name__icontains=query)
+                   Q(tags__name__icontains=query) |
+                   Q(categories__name__icontains=query)
                    )
         # tshirt, t-shirt, t shirt, red, green, blue,
         return self.filter(lookups).distinct()
@@ -54,6 +55,7 @@ class Product(models.Model):
     on_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(max_digits=20, decimal_places=2, blank=True, null=True)
     quantity = models.PositiveIntegerField(default=0)
+    sold = models.PositiveIntegerField(default=0, null=True)
     description = models.TextField(blank=True, null=True)
     short_description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS)
