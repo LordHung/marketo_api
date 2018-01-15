@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import pre_save
+
+from products.models import Product
 
 User = settings.AUTH_USER_MODEL
 
@@ -36,7 +37,7 @@ class Order(models.Model):
     shipping_total = models.DecimalField(
         default=20000.00, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
-    currency = models.CharField(max_length=50, default='VND')
+    currency = models.CharField(max_length=50, choices=CURRENCY_CHOICES, default='VND')
     active = models.BooleanField(default=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
