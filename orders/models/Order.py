@@ -47,3 +47,6 @@ class Order(models.Model):
 
     class Meta:
         db_table = 'order'
+
+    def __str__(self):
+        return str(self.id)

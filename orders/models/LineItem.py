@@ -17,6 +17,9 @@ class LineItem(models.Model):
     class Meta:
         db_table = 'line_item'
 
+    def __str__(self):
+        return str(self.id)
+
 
 def calculate_sold_product_receiver(sender, instance, created, *args, **kwargs):
     product = Product.objects.get(id=instance.product.id)
