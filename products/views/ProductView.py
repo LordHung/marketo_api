@@ -13,6 +13,8 @@ from ..serializers import ProductSerializer
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    ordering_fields = '__all__'
+    # search_fields = ('@name', '@price', '@description', '@categories__name', )  # DRF chưa support Fulltext search của Postgre
 
     # def create(self, request, *args, **kwargs):
     #     serializer = ProductSerializer(data=request.DATA, files=request.FILES)
@@ -25,7 +27,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         store_id = category_id = None
         queryset = Product.objects.all()
         params = request.query_params
-        # print(params)
         try:
             if 'store-id' in params:
                 store_id = params['store-id']

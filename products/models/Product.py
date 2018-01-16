@@ -70,7 +70,10 @@ class Product(models.Model):
 
     class Meta:
         db_table = 'product'
-        ordering = ['-name']
+        ordering = ['id']
+        indexes = [
+            models.Index(fields=['name'], name='product_name_idx'),
+        ]
 
     def __str__(self):
         return self.name
