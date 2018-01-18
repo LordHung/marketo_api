@@ -23,14 +23,15 @@ class LineItem(models.Model):
 
 def calculate_sold_product_receiver(sender, instance, created, *args, **kwargs):
     product = Product.objects.get(id=instance.product.id)
+    item_quantity = instance.quantity
     print('DEBUG', product.name)
     product.sold += 1
 
-    if product.quantity == 1:
-        product.quantity -= 1
+    if product.quantity == item_quantity:
+        product.quantity -= item_quantity
         product.purchasable = False
-    elif product.quantity > 1:
-        product.quantity -= 1
+    elif product.quantity > item_quantity:
+        product.quantity -= item_quantity
     else:
         raise Exception('Đã hết hàng!')
 
