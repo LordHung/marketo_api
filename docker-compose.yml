@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  web:
+    container_name: con_marketo_web
+    build: .
+    ports:
+      '8000:8000'
+    expose:
+      - '8000'
+    volumes:
+      - .:/code/python/marketo_api/
+    env_file: .env
+    environment:
+      DEBUG: 'false'
+    command: python3 manage.py runserver
