@@ -12,7 +12,7 @@ import os
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import WhiteNoise
 
-ENV = "src.environments.development"
+ENV = "src.environments.production"
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", ENV)
 

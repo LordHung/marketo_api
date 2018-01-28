@@ -3,8 +3,7 @@ import os
 
 DEBUG = True
 
-# SECRET_KEY = os.environ.get('SECRET_KEY', '5y1ytgnq%*!&#qky0w%1eo)n9xluno3@6m!)su+%2mm0==isuo')
-SECRET_KEY = '5y1ytgnq%*!&#qky0w%1eo)n9xluno3@6m!)su+%2mm0==isuo'
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 ALLOWED_HOSTS = ['https://marketo-django.herokuapp.com', ]
 
