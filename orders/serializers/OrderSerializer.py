@@ -23,11 +23,14 @@ class OrderSerializer(serializers.ModelSerializer, ):
         total = Decimal(0.00)
         for item in lineitems:
             prod = item['product']
+            print(item['quantity'])
             if prod.on_sale:
-                total += prod.sale_price * item['quantity']
+                total += prod.sale_price * Decimal(item['quantity'])
             else:
-                total += prod.price * item['quantity']
+                total += prod.price * Decimal(item['quantity'])
+            print(total)
 
+        print(total)
         order = Order.objects.create(**validated_data, total=total)
 
         for lineitem in lineitems:

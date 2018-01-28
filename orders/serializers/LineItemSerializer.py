@@ -19,4 +19,4 @@ class LineItemSerializer(serializers.ModelSerializer):
             else:
                 return object.product.price * object.quantity
         except:
-            return 0.0            
+            return 0.0

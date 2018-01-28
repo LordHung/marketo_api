@@ -24,7 +24,7 @@ class LineItem(models.Model):
 def calculate_sold_product_receiver(sender, instance, created, *args, **kwargs):
     product = Product.objects.get(id=instance.product.id)
     item_quantity = instance.quantity
-    print('DEBUG', product.name)
+    print('SOLDRECEIVER', product.name)
     product.sold += 1
 
     if product.quantity == item_quantity:

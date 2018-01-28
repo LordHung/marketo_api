@@ -42,14 +42,18 @@ class StoreSerializer(serializers.ModelSerializer):
             featured_dc = obj.product_set.filter(on_sale=True).order_by('-sale_rate').first().image_set.all()[:1]
         except:
             featured_dc = Image.objects.none()
+
         try:
-            featured_tr = obj.product_set.filter(average_rating__gte=4).order_by('-average_rating').first().image_set.all()[:1]
+            featured_tr = obj.product_set.filter(average_rating__gte=4).order_by(
+                '-average_rating').first().image_set.all()[:1]
         except:
             featured_tr = Image.objects.none()
+
         try:
             featured_ts = obj.product_set.filter(sold__gte=1).order_by('-sold').first().image_set.all()[:1]
         except:
             featured_ts = Image.objects.none()
+            # raise Exception(obj.name, 'FUCKUP')
 
         featured_images = featured_dc.union(featured_tr, featured_ts, all=True)
 

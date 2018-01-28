@@ -36,11 +36,11 @@ class VariationAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    fields = ('store', 'name', ('price', 'on_sale', 'sale_price'), 'quantity', 'status',
-              'purchasable', 'reviews_allowed', ('description', 'short_description'), 'attributes', 'tags', )
+    fields = ('store', 'name', ('price', 'on_sale', 'sale_price'), 'quantity', 'status', 'purchasable',
+              'reviews_allowed', ('description', 'short_description'), 'categories', 'attributes', 'tags', )
     # filter_horizontal = ('attributes', )  # select, filter
     list_display = ('id', 'name', 'store', 'price', 'sale_price',
-                    'quantity', 'status', 'purchasable', 'reviews_allowed', )
+                    'quantity', 'status', 'sold', 'purchasable', 'reviews_allowed', )
     list_display_links = ('id', 'name', )
     empty_value_display = '--empty--'
     inlines = (ProductImageInline, )
@@ -48,9 +48,13 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    fields = ('name', 'parent', 'store', 'active', 'image', 'description', 'slug', )
+    list_display = ('id', 'name', 'store', 'parent', 'active', )
+    list_display_links = ('id', 'name')
 
 
 @admin.register(Review)
 class ProductReviewAdmin(admin.ModelAdmin):
-    pass
+    fields = ('user', 'product', 'rating', 'approved', 'spam', 'comment')
+    list_display = ('id', 'user', 'product', 'rating', 'approved', 'spam')
+    list_display_links = ('id', 'user', )
