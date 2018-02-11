@@ -45,5 +45,5 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
-    read_env()
+    # read_env()
     execute_from_command_line(sys.argv)
