@@ -5,7 +5,7 @@ DEBUG = True
 
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
-ALLOWED_HOSTS = ['https://marketo-django.herokuapp.com', ]
+ALLOWED_HOSTS = ['marketo-django.herokuapp.com', ]
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
