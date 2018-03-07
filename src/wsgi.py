@@ -16,5 +16,5 @@ ENV = "src.environments.production"
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", ENV)
 
-application = get_wsgi_application()
-# application = WhiteNoise(get_wsgi_application())
+# application = get_wsgi_application()
+application = WhiteNoise(get_wsgi_application())
