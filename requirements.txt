@@ -1,5 +1,5 @@
 # Django
-Django==2.0.1
+Django==2.2.13
 djangorestframework==3.7.7
 django-rest-swagger==2.1.2  # API Documentation
 djangorestframework-jwt==1.11.0  # JSON Web Token for DRF
